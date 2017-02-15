@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+</head>
+<body ng-app="app" ng-controller="TestCntrl">
+<button ng-click="sendData()">send data</button>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.js"></script>
+<script type="text/javascript">
+  angular.module('app', ['ngResource'])
+      .controller('TestCntrl', function TestCntrl($scope, $resource, $http) {
+        var api = $resource('/DELETE', {}, {
+          unsubscribe: {
+            method: 'DELETE'
+          }
+        });
+
+        $scope.sendData = function() {
+          api.unsubscribe({}, {test: 'this is $resource.delete'}); // With this there won't be any postBody
+
+
+          // With this there will be postBody
+          $http({
+            method: 'DELETE',
+            url: '/DELETE',
+            data: {testData: 'this is $http.delete'}
+          }).then(function successCallback(res) {
+            console.log('data received with DELETE', res.data);
+          }, function errorCallback(res) {
+            console.error(res);
+          });
+
+          // With this there will be postBody
+          $http({
+            method: 'POST',
+            url: '/POST',
+            data: {testData: 'this is $http.post'}
+          }).then(function successCallback(res) {
+            console.log('data received with POST', res.data);
+          }, function errorCallback(res) {
+            console.error(res);
+          });
+        };
+      });
+</script>
+</body>
+</html>
