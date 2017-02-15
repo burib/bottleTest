@@ -24,7 +24,11 @@
           $http({
             method: 'DELETE',
             url: '/DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
             data: {"testData": "this is $http.delete"}
+
           }).then(function successCallback(res) {
             console.log('data received with DELETE', res.data);
           }, function errorCallback(res) {
