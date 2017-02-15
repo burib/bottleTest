@@ -17,14 +17,14 @@
         });
 
         $scope.sendData = function() {
-          api.unsubscribe({}, {test: 'this is $resource.delete'}); // With this there won't be any postBody
+          api.unsubscribe({}, {"testData": "this is $resource.delete"}); // With this there won't be any postBody
 
 
           // With this there will be postBody
           $http({
             method: 'DELETE',
             url: '/DELETE',
-            data: {testData: 'this is $http.delete'}
+            data: {"testData": "this is $http.delete"}
           }).then(function successCallback(res) {
             console.log('data received with DELETE', res.data);
           }, function errorCallback(res) {
@@ -35,7 +35,7 @@
           $http({
             method: 'POST',
             url: '/POST',
-            data: {testData: 'this is $http.post'}
+            data: {"testData": "this is $http.post"}
           }).then(function successCallback(res) {
             console.log('data received with POST', res.data);
           }, function errorCallback(res) {
